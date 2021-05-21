@@ -1,0 +1,69 @@
+class Solution
+{
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    //Function to count inversions in the array.
+    static long count = 0;
+    static long inversionCount(long arr[], long N)
+    {   
+        count = 0;
+        int j = (int)N;
+        sort(arr,0,j-1);
+        return count;
+        
+    }
+    
+    static void sort(long arr[],int i, int n){
+        if(i<n){
+            int mid = i+(n-i)/2;
+            
+            sort(arr,i,mid);
+            sort(arr,mid+1,n);
+            //System.out.println(i+" "+mid+" "+n);
+            merge(arr,i,mid,n);
+        }
+    }
+    
+    static void merge(long arr[], int l, int mid, int r){
+        if(l<r){
+        int n1 = mid-l+1;
+        int n2 = r-mid;
+        
+        int i,j;
+        
+        long left[] = new long[n1];
+        for(i=0;i<n1;i++)
+            left[i] = arr[l+i];
+            
+            
+        long right[] = new long[n2];    
+        for(j=0;j<n2;j++)
+            right[j] = arr[mid+1+j];
+            
+        i=0;
+        j=0;
+        int k=l;
+        while(i<n1 && j<n2){
+            if(left[i]<=right[j]){
+                arr[k] = left[i];
+                i++;
+            }
+            else{
+                arr[k] = right[j];
+                j++;
+                count += n1-i;
+            }
+            k++;
+        }
+        
+        for(;i<n1;i++){
+            arr[k] = left[i];
+            k++;
+        }
+        for(;j<n2;j++){
+            arr[k] = right[j];
+            k++;
+        }
+    }
+}
+}
