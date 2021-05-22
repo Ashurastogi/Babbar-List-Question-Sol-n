@@ -1,0 +1,23 @@
+class Solution {
+    public int maxProfit(int[] arr) {
+        int n = arr.length;
+        
+        int i,j,sub;
+        int max = 0;
+        for(i=0;i<n;i++){
+            for(j=i+1;j<n;j++){
+                if(arr[i]<arr[j]){
+                    sub = arr[j] - arr[i];
+                    
+                    if(sub>max){
+                        max = sub;
+                    }
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return max;
+    }
+}
