@@ -1,0 +1,22 @@
+public static boolean find3Numbers(int a[], int n, int X) { 
+    
+       int i,j,k,sum,s;
+       Arrays.sort(a);
+            
+            
+        for(i=0;i<n-2;i++){
+            j = i+1;
+            k = n-1;
+            sum = X-a[i];
+            while(j<k){
+                s = a[j]+a[k]; 
+                if(s>sum)
+                    k--;
+                else if(s==sum)
+                    return true;
+                else
+                    j++;
+            }
+        }
+        return false;
+    }
