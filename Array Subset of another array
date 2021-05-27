@@ -1,0 +1,14 @@
+public String isSubset( long a1[], long a2[], long n, long m) {
+        int i;
+        ArrayList<Long> arr = new ArrayList<>();
+        
+        for(i=0;i<n;i++){
+            arr.add(a1[i]);
+        }
+        for(i=0;i<m;i++){
+            if(!arr.contains(a2[i]))
+                return "No";
+        }
+        
+        return "Yes";
+    }
