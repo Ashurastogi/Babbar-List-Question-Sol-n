@@ -1,0 +1,19 @@
+public long findMinDiff (ArrayList<Long> a, long n, long j)
+    {   
+        long res=-1;
+        Collections.sort(a);
+        int i;
+        long diff;
+        int m = (int)--j;
+        for(i=0;i+m<n;i++){
+            diff = a.get(i+m) - a.get(i);
+            if(res == -1)
+                res = diff;
+            else if(res>diff)
+                res = diff;
+                
+            
+        }
+        
+        return res;
+    }
