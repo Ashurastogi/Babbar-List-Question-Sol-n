@@ -1,0 +1,27 @@
+ public void threeWayPartition(int arr[], int a, int b)
+    {
+        int n = arr.length;
+        int i=0;
+        int j = n-1;
+        int mid = 0;
+        int t;
+        
+        while(mid<=j){
+            if(arr[mid]<a){
+                t = arr[i];
+                arr[i] = arr[mid];
+                arr[mid] = t;
+                i++;
+                mid++;
+            }
+            else if(arr[mid]>b){
+                t = arr[j];
+                arr[j] = arr[mid];
+                arr[mid] = t;
+                j--;
+            }
+            else {
+                mid++;
+            }
+        }
+    }
