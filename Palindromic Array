@@ -1,0 +1,28 @@
+class GfG
+{
+	public static int palinArray(int[] a, int n){
+	    
+	    int i;
+	    for(i=0;i<n;i++){
+	        String s = String.valueOf(a[i]);
+	        if(!palindrome(s))
+	            return 0;
+	    }
+	    return 1;
+	}
+	
+	static Boolean palindrome(String s){
+	    int n = s.length()-1;
+	    int i = 0;
+	    
+	    while(i<n){
+	        if(s.charAt(i)!=s.charAt(n))
+	            return false;
+	            
+	        i++;
+	        n--;
+	    }
+	    return true;
+	}
+           
+}
