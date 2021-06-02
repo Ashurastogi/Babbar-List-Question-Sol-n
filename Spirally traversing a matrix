@@ -1,0 +1,41 @@
+static ArrayList<Integer> spirallyTraverse(int arr[][], int r, int c)
+    {
+        ArrayList<Integer> res = new ArrayList<>();
+        
+        int left = 0;
+        int right=c-1;
+        int top = 0;
+        int down = r-1;
+        int dir = 0;
+        int i;
+        while(left<=right && top<=down){
+            if(dir==0){
+                for(i=left;i<=right;i++)
+                    res.add(arr[top][i]);
+                
+                top++;
+            } 
+            else if(dir==1){
+                for(i=top;i<=down;i++)
+                    res.add(arr[i][right]);
+                
+                right--;
+            }
+            else if(dir==2){
+                for(i=right;i>=left;i--)
+                    res.add(arr[down][i]);
+                    
+                down--;
+            }
+            else if(dir==3){
+                for(i=down;i>=top;i--)
+                    res.add(arr[i][left]);
+                    
+                left++;
+            }
+            
+            dir = (dir+1)%4;
+        }
+        
+        return res;
+    }
