@@ -1,0 +1,35 @@
+class Solution {
+    public boolean searchMatrix(int[][] arr, int target) {
+        int i;
+        
+        int m = arr.length;
+        int n = arr[0].length;
+        
+        for(i=0;i<m-1;i++){
+            if(target==arr[i][0])
+                return true;
+            
+            if(target>arr[i][0] && target<arr[i+1][0])
+                return search(arr,i,0,n-1,target);
+        }
+        
+        return search(arr,i,0,n-1,target);
+    }
+    
+    boolean search(int[][]arr, int row,int i, int n, int target){
+        
+        if(i>n)
+            return false;
+        
+        int mid = i+(n-i)/2;
+        
+        if(arr[row][mid] == target)
+            return true;
+        
+        if(arr[row][mid]>target)
+            return search(arr,row, i,mid-1,target);
+        
+        
+        return search(arr,row, mid+1,n,target);
+    }
+}
