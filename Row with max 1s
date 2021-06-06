@@ -1,0 +1,30 @@
+class Solution {
+    int rowWithMax1s(int arr[][], int n, int m) {
+        int i,count;
+        int res = 0;
+        int fin=-1;
+        for(i=0;i<n;i++){
+           count = m-countnumber(arr[i],m); 
+           if(res<count){
+               res = count;
+               fin = i;
+           }
+        }
+        
+        return fin;
+    }
+    
+    int countnumber(int []arr,int n){
+        int low = 0;
+        int high = n-1;
+        
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]==0)
+                low = mid+1;
+            else
+                high = mid-1;
+        }
+        return low;
+    }
+}
