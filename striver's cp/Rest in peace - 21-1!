@@ -1,0 +1,60 @@
+
+
+/*
+ * uncomment this if you want to read input.
+//imports for BufferedReader
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+*/
+
+import java.util.*;
+
+
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+      
+        /*
+        //BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name = br.readLine();                // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT */
+
+       
+        Scanner input = new Scanner(System.in);
+        int t = input.nextInt();
+
+        int i;
+        long r;
+        
+        for(i=0;i<t;i++){
+            long n = input.nextLong();
+            if(n%21 == 0)
+                System.out.println("The streak is broken!");
+            else{
+                int a = 1;
+                int b = 1;
+
+                while(n>0){
+                    r = n%10;
+                    n = n/10;
+
+                    if(r==1 && (a==1 || a==-1 || a==0))
+                        a=0;
+                    else if(r==2 && b==1 && a==0)
+                        b = 0;
+                    else if(a==0 && b==1)
+                        a=-1;
+                }
+
+                if(a==0 && b==0)
+                   System.out.println("The streak is broken!");
+                else
+                    System.out.println("The streak lives still in our heart!"); 
+            }    
+        }                
+
+       
+
+    }
+}
