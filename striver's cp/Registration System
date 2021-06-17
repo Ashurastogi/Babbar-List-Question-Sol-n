@@ -1,0 +1,29 @@
+import java.util.*;
+public class A {
+
+	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		int i,j;
+		int t = input.nextInt();
+		input.nextLine();
+		HashMap<String,Integer> hs = new HashMap<>();
+		
+		for(i=0;i<t;i++) {
+			String s = input.nextLine();
+			
+			
+			if(!hs.containsKey(s)) {
+				hs.put(s, 1);
+				System.out.println("OK");
+			}
+			else {
+				System.out.println(s+hs.get(s));
+				hs.put(s, hs.get(s)+1);
+			
+			
+			}	
+		}
+	}
+
+}
