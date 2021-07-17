@@ -1,0 +1,54 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		InputStreamReader r=new InputStreamReader(System.in);    
+        BufferedReader br=new BufferedReader(r);  
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		int i,j,num;
+		long res;
+		
+		for(i=0;i<t;i++){
+		    
+		    int n = Integer.parseInt(br.readLine());
+		    
+		    String s = br.readLine();
+		    String c[] = s.split(" ");
+		    long pre[] = new long[n];
+		   
+		    for(j=0;j<n;j++){
+		        num =  Integer.parseInt(c[j]);
+		        if(j!=0)
+		            pre[j] = pre[j-1];
+		        
+		            
+		        if(num!=-1){
+		            pre[j]+=num;
+		            System.out.print(num+" ");
+		        }
+		        else{
+		            if(pre[j]==0)
+		                res = 0;
+		            else
+		                res = pre[j]/j;
+		            
+		            System.out.print(res+" ");
+		            pre[j] +=res;
+		            
+		        }
+		        
+		        
+		    }
+		    System.out.println();
+		}
+	}
+}
