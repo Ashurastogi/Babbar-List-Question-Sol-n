@@ -1,0 +1,37 @@
+import java.util.*;
+public class A {
+
+	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		int n,m,i,j,k,res;
+		n = input.nextInt();
+
+		
+		int [] arr = new int[n];
+		int [] pre = new int[n];
+		for(i=0;i<n;i++) {
+			arr[i] = input.nextInt();
+			if(i==0)
+				pre[i] = arr[i];
+			else
+				pre[i] = pre[i-1]+arr[i];
+		}
+		
+		m = input.nextInt();
+		
+		for(i=0;i<m;i++) {
+			j = input.nextInt();
+			k = input.nextInt();
+			//System.out.println(j+" "+k+" "+m);
+			if(j==0)
+				res = pre[k];
+			else
+				res = pre[k]-pre[j-1];
+			
+			System.out.println(res);
+		}
+		
+	}	
+
+}
