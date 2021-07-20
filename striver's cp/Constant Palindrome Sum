@@ -1,0 +1,59 @@
+import java.util.*;
+public class A {
+
+	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		int t,n,sum,i,j,k,res,l,r;
+		t = input.nextInt();
+		
+		
+		for(i=0;i<t;i++) {
+			n = input.nextInt();
+			k = input.nextInt();
+			int []arr = new int[n];
+			int []pre = new int[2*k+10];
+			for(j=0;j<n;j++)
+				arr[j] = input.nextInt();
+			
+			HashMap<Integer, Integer> hs = new HashMap<>();
+			for(j=0;j<n/2;j++) {
+				sum = arr[j]+arr[n-j-1];
+				if(!hs.containsKey(sum))
+					hs.put(sum, 1);
+				else
+					hs.put(sum, 1+hs.get(sum));
+				
+				l = arr[j]+1;
+				r = arr[n-j-1]+k;
+				pre[l] += 1;
+				pre[r+1] -= 1;
+				
+			}
+			for(j=1;j<2*k+10;j++)
+				pre[j] += pre[j-1];
+			
+			res = Integer.MAX_VALUE;
+			
+			int z,o,tw;
+			
+			for(j=2;j<=2*k;j++) {
+				z=0;
+				o=0;
+				tw = 0;
+				if(hs.containsKey(j))
+					z = hs.get(j);
+				if(pre[j-1]>z)
+					o = pre[j-1]-z;
+				tw = (n/2) - o-z;
+				
+				sum = o+(tw*2);
+				res = Math.min(sum, res);
+			}
+			
+			System.out.println(res);
+		}
+		
+	}	
+
+}
