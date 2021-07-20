@@ -24,27 +24,33 @@ public class A {
 				else
 					hs.put(sum, 1+hs.get(sum));
 				
-				l = arr[j]+1;
-				r = arr[n-j-1]+k;
+				
+				    l = Math.min(arr[j], arr[n-j-1])+1;
+				    r = Math.max(arr[j], arr[n-j-1])+k;
+			
 				pre[l] += 1;
 				pre[r+1] -= 1;
 				
 			}
-			for(j=1;j<2*k+10;j++)
-				pre[j] += pre[j-1];
+			sum=0;
+			for(j=0;j<2*k+10;j++){
+			    sum += pre[j];
+			    pre[j] = sum;
+			}
+				
 			
-			res = Integer.MAX_VALUE;
+			res = n;
 			
 			int z,o,tw;
 			
 			for(j=2;j<=2*k;j++) {
-				z=0;
-				o=0;
-				tw = 0;
+                		z=0;
+                		o=0;
+                		tw = 0;
 				if(hs.containsKey(j))
 					z = hs.get(j);
-				if(pre[j-1]>z)
-					o = pre[j-1]-z;
+
+					o = pre[j]-z;
 				tw = (n/2) - o-z;
 				
 				sum = o+(tw*2);
