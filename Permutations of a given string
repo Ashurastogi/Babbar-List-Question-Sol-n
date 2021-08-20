@@ -1,0 +1,37 @@
+class Solution {
+    public List<String> find_permutation(String s) {
+        
+        
+        ArrayList<String> arr = new ArrayList<>();
+        int n = s.length();
+        int [] flag = new int[n];
+        ArrayList<String> temp = new ArrayList<>();
+        solve(s,arr,flag,temp);
+        
+        Collections.sort(arr);
+        return arr;
+        
+        
+    }
+    
+    public void solve(String ip,ArrayList<String> res, int[]flag, ArrayList<String> temp){
+        int n = ip.length();
+        
+        if(n==temp.size()){
+            res.add(String.join("", temp));
+            return;
+        }
+        
+        for(int i= 0;i<n;i++){
+            if(flag[i]==0){
+                flag[i] = 1;
+                temp.add(Character.toString(ip.charAt(i)));
+                
+                solve(ip,res,flag,temp);
+                temp.remove(temp.size()-1);
+                flag[i] = 0;
+            }
+        }
+        
+    }
+}
