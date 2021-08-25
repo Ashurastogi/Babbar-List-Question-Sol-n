@@ -1,0 +1,27 @@
+class Solution {
+    public int editDistance(String s, String t) {
+        int ns = s.length();
+        int nt = t.length();
+        
+        
+        
+        int [][] te = new int[ns+1][nt+1];    
+        for(int []a : te)
+            Arrays.fill(a, -1);
+        int res =  solve(s,t,ns,nt,te);
+        return res;
+    }
+    
+    public int solve(String s, String t, int sn, int tn, int[][] te){
+        if(sn==0 || tn == 0)
+            return Math.max(sn,tn);
+        if(te[sn][tn] != -1)
+            return te[sn][tn];
+            
+        if(s.charAt(sn-1) == t.charAt(tn-1))
+            return te[sn][tn] = solve(s,t,sn-1,tn-1,te);
+            
+        return te[sn][tn] = 1+Math.min( solve(s,t,sn,tn-1,te), Math.min(solve(s,t,sn-1,tn, te),
+                        solve(s,t,sn-1,tn-1, te)));
+    }
+}
