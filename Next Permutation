@@ -1,0 +1,43 @@
+class Solution{
+    static List<Integer> nextPermutation(int n, int arr[]){
+        int i;
+        for(i=n-1; i>0;i--){
+            if(arr[i]>arr[i-1]){
+                find(i-1,n-1,arr);
+                break;
+            }
+        }
+        
+        reverse(i,n-1,arr);
+       
+        
+        
+        ArrayList<Integer> a = new ArrayList<>();
+        for(int f: arr)
+            a.add(f);
+        return a;
+    }
+    
+    static void reverse(int i, int n, int[] arr){
+        while(i<n){
+            int t = arr[i];
+            arr[i] = arr[n];
+            arr[n] = t;
+            i++;
+            n--;
+        }
+    }
+    
+    static void find(int i, int n, int[] arr){
+        while(n>i){
+            if(arr[n]>arr[i]){
+            int t = arr[i];
+            arr[i] = arr[n];
+            arr[n] = t;
+            return ;
+            }
+            
+            n--;
+        }
+    }
+}
