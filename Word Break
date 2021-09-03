@@ -1,0 +1,30 @@
+class Sol
+{
+    public static int wordBreak(String A, ArrayList<String> B )
+    {
+      
+        ArrayList<String> dict=B;
+        String ip = A;
+        Boolean op = false;
+        Boolean a = solve(op, ip,dict);
+         return a==true?1:0;
+    }
+    
+    public static Boolean solve(Boolean op, String ip, ArrayList<String> dict){
+        if(ip.length() == 0)
+            return op;
+            
+        for(int k=1;k<=ip.length();k++){
+            
+            
+            op = dict.contains(ip.substring(0,k));
+            if(op)
+                solve(op, ip.substring(k,ip.length()), dict);    
+            
+            
+        }
+        
+        return false;
+            
+    }
+}
