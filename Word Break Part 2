@@ -1,0 +1,33 @@
+class Solution{
+    static List<String> wordBreak(int n, List<String> dict, String s)
+    {
+        List<String> res = new ArrayList<>();
+        
+        String op = "";
+        
+        solve(op, s,dict,res);
+        
+        return res;
+        
+    }
+    
+    public static void solve(String op, String ip, List<String> dict, List<String> res){
+        if(ip.length() == 0){
+            res.add(op.substring(0, op.length()-1));
+            return;
+        }
+            
+        for(int k=1;k<=ip.length();k++){
+            String t = ip.substring(0,k);
+            
+            if(dict.contains(t)){
+                
+                
+                solve(op+t+" ", ip.substring(k, ip.length()),dict,res);
+                
+            }    
+            
+            
+        }
+    }
+}
