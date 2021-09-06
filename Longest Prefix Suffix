@@ -1,0 +1,29 @@
+class Solution {
+    int lps(String s) {
+        int n  = s.length();
+        
+        int i=1;
+        int j =0;
+        
+        int [] arr = new int[n];
+        while(i<n){
+            if(s.charAt(i) == s.charAt(j)){
+                arr[i] = j+1;
+                
+                i++;
+                j++;
+                
+                
+            }
+            else if(j==0){
+                i++;
+            }
+            else{
+                j--;
+                j = arr[j];
+            }
+        }
+        
+        return arr[n-1];
+    }
+}
