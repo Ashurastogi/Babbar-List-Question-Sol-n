@@ -1,0 +1,40 @@
+class Sol
+{
+    int countRev (String s)
+    {
+        int n = s.length();
+        int i;
+        Stack<Character> st = new Stack<>();
+        if(n%2 !=0)
+            return -1;
+        int o=0;
+        int c = 0;    
+        for(i=0;i<n;i++){
+            char x = s.charAt(i);
+            
+            
+            if(x == '{'){
+                st.push(x);
+                o++;
+            }
+            else if(x =='}' && st.size()!=0 && st.peek() == '{'){
+                st.pop();
+                o--;
+            }
+            else
+                c++;
+            
+        }
+        
+        if(o%2 == 0)
+            o = o/2;
+        else
+            o = (o/2)+1;
+        if(c%2 == 0)
+            c = c/2;
+        else
+            c = (c/2)+1;
+            
+        return o+c;
+    }
+}
