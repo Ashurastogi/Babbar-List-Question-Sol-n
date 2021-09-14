@@ -1,0 +1,224 @@
+class Solution
+{
+    public int[][] searchWord(char[][] grid, String word)
+    {
+        int n = grid.length;
+        int m = grid[0].length;
+        
+        int size = word.length();
+        ArrayList<String> ar = new ArrayList<>();
+        
+        int i,j,g;
+        
+        for(i=0;i<n;i++){
+            for(j=0;j<m;j++){
+                g = checkup(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                
+                g = checkdown(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                
+                g = checkleft(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                    
+                g = checkright(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                    
+                g= check_diaglup(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                    
+                g = check_diagldown(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                    
+                g = check_diagrup(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+                    
+                g = check_diagrdown(i,j,word,grid,size,n,m,0);
+                if(g!=-1){
+                    ar.add(i+" "+j);
+                    continue;
+                }
+            }
+        }
+        
+        int ss = ar.size();
+        
+        int [][] res = new int[ss][2];
+        for(i=0;i<ss;i++){
+            String[] te = ar.get(i).split(" ");
+            
+            res[i][0] = Integer.parseInt(te[0]);
+            res[i][1] = Integer.parseInt(te[1]);
+        }
+        return res;
+    }
+    
+    public int checkup(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return checkup(i-1,j,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    public int checkdown(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return checkdown(i+1,j,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    public int checkleft(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return checkleft(i,j-1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    public int checkright(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return checkright(i,j+1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    public int check_diaglup(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return check_diaglup(i-1,j-1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    public int check_diagldown(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return 0;
+            else
+                return check_diagldown(i+1,j+1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    public int check_diagrup(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return j;
+            else
+                return check_diagrup(i-1,j+1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+    
+    
+    
+    public int check_diagrdown(int i,int j,String s,char[][]ch,int size,int n,int m,int id){
+    
+        if(i>=0 && j>=0 && i<n && j<m && s.charAt(id)==ch[i][j]){
+            
+            
+            id++;
+            
+            if(id==size)
+                return j;
+            else
+                return check_diagrdown(i+1,j-1,s,ch,size,n,m,id);
+                    
+        }
+        
+        return -1;
+    }
+}
