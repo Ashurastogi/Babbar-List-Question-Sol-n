@@ -1,0 +1,46 @@
+class Solution {
+    public List<List<String>> Anagrams(String[] slist) {
+        int n = slist.length;
+        
+        int i,j;
+        String[] com = new String[n];
+        for(i=0;i<n;i++){
+            char ta[] = slist[i].toCharArray();
+ 
+        // Sorting temp array using
+        Arrays.sort(ta);
+ 
+        // Returning new sorted string
+        com[i] =  new String(ta);
+        }
+        
+        List<String> al =
+            new ArrayList<String>(Arrays.asList(slist));
+        
+        List<List<String>> res = new ArrayList<>();
+        
+        
+      
+        int in = 0;
+        
+        for(i=0;i<n;i++){
+            if(!com[i].equals("-1")){
+                res.add(new ArrayList<String>());
+                res.get(in).add(al.get(i));
+            
+                for(j=i+1;j<n;j++){
+                    if(!com[j].equals("-1") && com[i].equals(com[j])){
+                        res.get(in).add(al.get(j));
+                        com[j] = "-1";
+                    }    
+                }
+                in++;
+            }
+            
+            
+        }
+        
+        return res;
+    }
+    
+}
