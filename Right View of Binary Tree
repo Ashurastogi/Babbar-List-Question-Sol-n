@@ -1,0 +1,40 @@
+class Pair{
+    Node a;
+    int b;
+    
+    Pair(Node a, int b){
+        this.a = a;
+        this.b = b;
+    }
+}
+
+class Solution{
+    //Function to return list containing elements of right view of binary tree.
+    ArrayList<Integer> rightView(Node node) {
+        Queue<Pair> q = new LinkedList<>();
+        
+        HashMap<Integer, Integer> sm = new HashMap<>();
+        q.add(new Pair(node, 0));
+        
+        while(! q.isEmpty()){
+            Pair n = q.remove();
+            
+            if(n.a.left !=null)
+                q.add(new Pair(n.a.left, n.b+1));
+                
+            if(n.a.right !=null)
+                q.add(new Pair(n.a.right, n.b+1));
+                
+            sm.put(n.b, n.a.data);
+        }
+        
+        ArrayList<Integer> res= new ArrayList<>();
+        
+        for(Map.Entry m: sm.entrySet()){
+            res.add((int)m.getValue());
+        }
+        
+        return res;
+    }
+}
+
