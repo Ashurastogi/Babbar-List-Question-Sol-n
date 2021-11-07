@@ -1,0 +1,48 @@
+class Pair{
+    Node a;
+    int b;
+    
+    Pair(Node a, int b){
+        this.a = a;
+        this.b = b;
+    }
+}
+
+class GFG
+{
+    //Function to store the zig zag order traversal of tree in a list.
+	ArrayList<Integer> zigZagTraversal(Node root)
+	{
+	    ArrayList<Integer> res = new ArrayList<>();
+	    Queue<Pair> q = new LinkedList<>();
+	    Stack<Integer> st = new Stack<>();
+	    
+	    q.add(new Pair(root, 0));
+	    
+	    while(!q.isEmpty()){
+	       Pair p = q.remove();
+	       if(p.b %2==0){
+	           while(!st.isEmpty())
+	                res.add(st.pop());
+	        res.add(p.a.data);
+	       }
+	       else{
+	            st.push(p.a.data);    
+	       }
+	       
+	       if(p.a.left != null){
+	            q.add(new Pair(p.a.left, p.b+1));    
+	       }
+	       
+	       if(p.a.right != null){
+	            q.add(new Pair(p.a.right, p.b+1));    
+	       }
+	       
+	    }
+	    while(!st.isEmpty())
+	                res.add(st.pop());
+	    
+	    return res;
+	    
+	}
+}
