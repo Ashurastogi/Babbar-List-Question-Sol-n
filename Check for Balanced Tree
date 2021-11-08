@@ -1,0 +1,28 @@
+class Tree
+{   
+    public boolean res = true ;
+    
+    //Function to check whether a binary tree is balanced or not.
+    boolean isBalanced(Node root)
+    {
+	    solve(root);
+	    
+	    return res;
+    }
+    
+    int solve(Node n){
+        if(n == null)
+            return 0;
+            
+        int l = solve(n.left);
+        int r = solve(n.right);
+        
+        if(Math.abs(l-r)>1)
+            res = false;
+        
+        //System.out.println(l+" "+r+" "+res);
+        
+        return 1+Math.max(l,r);
+    }
+}
+
