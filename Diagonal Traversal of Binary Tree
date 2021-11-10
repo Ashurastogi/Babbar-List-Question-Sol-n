@@ -1,0 +1,32 @@
+class Tree
+{
+     public ArrayList<Integer> diagonal(Node root)
+      {
+           ArrayList<Integer> res = new ArrayList<>();
+           
+           Queue<Node> q = new LinkedList<>();
+           
+           q.add(root);
+           
+           while(!q.isEmpty()){
+               Node n = q.remove();
+               res.add(n.data);
+               
+               if(n.left!=null)
+                    q.add(n.left);
+               
+               while(n.right != null){
+                   n = n.right;
+                   res.add(n.data);
+                   
+                   if(n.left!=null)
+                        q.add(n.left);
+                    
+               }
+                    
+                
+           }
+           
+           return res;
+      }
+}
