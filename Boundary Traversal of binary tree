@@ -1,0 +1,52 @@
+class Solution
+{
+    ArrayList<Integer> res = new ArrayList<>();
+    
+    
+	ArrayList <Integer> boundary(Node node){
+	    res.add(node.data);
+	    Node r = node.left;
+	    
+	    while(r!=null){
+	        if(r.left !=null || r.right !=null)
+	            res.add(r.data);
+	        if(r.left!=null)
+	            r = r.left;
+	        else
+	            r = r.right;
+	    }
+	   
+	    traversal(node);
+	    
+	    Stack<Integer> st = new Stack<>();
+	    
+	    r = node.right;
+	    
+	    while(r!=null){
+	        if(r.left !=null || r.right !=null)
+	            st.push(r.data);
+	        if(r.right!=null)
+	            r = r.right;
+	        else
+	            r = r.left;
+	    }
+	    
+	    while(!st.isEmpty())
+	        res.add(st.pop());
+	        
+	    return res;
+	    
+	}
+	
+	void traversal(Node r){
+	    
+	    if(r==null)
+	        return;
+	    if(r.left==null && r.right == null)
+	        res.add(r.data);
+	        
+	    traversal(r.left);
+	    traversal(r.right);
+	}
+	
+}
