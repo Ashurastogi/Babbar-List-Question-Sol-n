@@ -1,0 +1,20 @@
+class Solution{
+    public void toSumTree(Node root){
+        solve(root);
+    }
+    
+    public int solve(Node n){
+        if(n==null)
+            return 0;
+        if(n.left == null && n.right == null){
+            int a = n.data;
+            n.data = 0;
+            return a;
+        }
+        
+        
+        int a = n.data;  
+        n.data = solve(n.left)+solve(n.right);
+        return n.data+a;
+    }
+}
