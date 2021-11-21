@@ -1,0 +1,43 @@
+class Solution
+{   
+    public static Node buildTree(int inorder[], int preorder[], int n)
+    {
+ 
+        return solve(inorder, preorder,0, n-1,0,n-1);
+    }
+    
+    static Node solve(int []in, int[] pre, int ins, int ine, int pres, int pree){
+        
+        if(ins> ine || pres>pree)
+            return null;
+        
+        Node root = new Node(pre[pres]);
+        
+        int lpres = pres+1;
+        int lins = ins;
+        
+        int rootin=-1;
+        
+        for(int i=ins;i<=ine;i++){
+            if(root.data == in[i]){
+                rootin = i;
+                break;
+            }
+        }
+        
+        int linend = rootin-1;
+        int lpreend = linend - lins + lpres;
+        
+        int rpres = lpreend+1;
+        int rpreend = pree;
+        
+        int rins = rootin+1;
+        int rinend = ine;
+        
+        root.left = solve(in, pre, lins, linend, lpres, lpreend);
+        root.right = solve(in, pre, rins, rinend, rpres, rpreend);
+        
+        return root;
+        
+    }
+}
