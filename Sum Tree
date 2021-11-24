@@ -1,0 +1,37 @@
+class Solution
+{
+	boolean isSumTree(Node root)
+	{
+
+        int res = solve(root);
+        
+        if(res==-1)
+            return false;
+        else
+            return true;
+        
+        
+	}
+	
+	int solve(Node n){
+	    if(n==null)
+	        return 0;
+	    if(n.left== null && n.right == null)
+	        return n.data;
+	        
+	    int l = solve(n.left);
+	    if(l==-1)
+	        return l;
+	        
+	    int r = solve(n.right);
+	    if(r == -1)
+	        return r;
+	        
+	    if(n.data != l+r)
+	        return -1;
+	    else
+	       return n.data +=  l+r;
+	        
+
+	}
+}
