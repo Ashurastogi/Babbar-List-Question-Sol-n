@@ -1,0 +1,25 @@
+class Solution
+{
+    int lvl = -1;
+    boolean check(Node root)
+    {
+	    return solve(root, 0);
+    }
+    
+    boolean solve(Node n, int h){
+        if(n==null)
+            return true;
+            
+            
+        if(n.left == null && n.right==null){
+            if(lvl == -1)
+                lvl = h;
+            else if(h!=lvl)
+                return false;
+            else
+                return true;
+        }
+        
+        return solve(n.left, h+1) & solve(n.right, h+1);
+    }
+}
