@@ -1,0 +1,30 @@
+class Solution {
+    ArrayList<String> arr = new ArrayList<>();
+    int flag = 0;
+    int dupSub(Node root) {
+        
+        
+        solve(root);
+        
+        if(flag==1)
+            return 1;
+            
+        return 0;
+        
+    }
+    
+    
+    String solve(Node n){
+        if(n==null)
+            return "$";
+            
+        String s = solve(n.left)+String.valueOf(n.data)+solve(n.right);
+        
+        if(arr.contains(s) && s.length()>=7)
+            flag = 1;
+            
+        arr.add(s);
+        
+        return s;
+    }
+}
