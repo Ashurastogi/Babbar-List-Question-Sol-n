@@ -1,0 +1,34 @@
+class Solution{
+    int res = 0;
+    int h = 0;
+    public int sumOfLongRootToLeafPath(Node root)
+    {
+        int[] arr = new int[2];
+        solve(root, arr);
+        return res;
+    }
+    
+    public void solve(Node n, int[]arr){
+        if(n == null){
+            if(arr[1]>h){
+                h = arr[1];
+                res = arr[0];
+            }
+            else if(arr[1]==h)
+                res = Math.max(res,arr[0]);
+                
+            return;
+        }
+            
+        
+        arr[0]+=n.data;
+        arr[1]++;
+        solve(n.left, arr);
+        
+        
+            
+        solve(n.right, arr);
+        arr[0]-=n.data;
+        arr[1]--;
+    }
+}
