@@ -1,0 +1,43 @@
+class Solution{
+    HashMap<String, Integer> hs = new HashMap<>();
+    
+    ArrayList<Node> ar = new ArrayList<>();
+    
+    public List<Node> printAllDups(Node root)
+    {
+        hs.clear();
+        ar.clear();
+        solve(root);
+        return ar;
+    }
+    
+    String solve(Node n){
+        if(n==null)
+            return "";
+        String s = "";   
+        
+        s += String.valueOf(n.data);
+        s += " ";
+        
+        s += solve(n.left);
+        s+= " ";
+        
+        s += solve(n.right);
+        s+= " ";
+
+        
+        checkexist(s, n);
+        return s;
+    }
+    
+    
+    void checkexist(String s, Node n){
+        if(hs.containsKey(s) && hs.get(s)==1){
+            ar.add(n);
+            hs.put(s,2);
+        }
+        else
+            hs.put(s,1);
+    }
+    
+}
