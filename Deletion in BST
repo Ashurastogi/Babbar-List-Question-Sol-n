@@ -1,0 +1,54 @@
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null)
+            return null;
+        
+        if(root.val==key)
+            return solve(root);
+        
+        
+        checkexist(root,key);
+        
+        
+        return root;
+    }
+    
+    public TreeNode checkexist(TreeNode n, int key){
+        
+        if(n==null)
+            return n;
+        if(n.left!=null && n.left.val==key)
+            return n.left = solve(n.left);
+        
+        if(n.right!=null && n.right.val==key)
+            return n.right = solve(n.right);
+        
+        if(n.val<key)
+            return checkexist(n.right, key);
+        
+        return checkexist(n.left, key);
+    }
+    
+    public TreeNode solve(TreeNode n){
+        if(n.left == null)
+            return n.right;
+        if(n.right==null)
+            return n.left;
+        else{
+            TreeNode l = n.left;
+            TreeNode linright = successor(n.right);
+            
+            linright.left = l;
+            
+            return n.right;
+        }
+    }
+    
+    
+    public TreeNode successor(TreeNode n){
+        if(n.left==null)
+            return n;
+        
+        return successor(n.left);
+    }
+}
