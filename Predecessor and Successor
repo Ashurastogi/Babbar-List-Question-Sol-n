@@ -1,0 +1,50 @@
+class GfG
+{
+    
+    public static void findPreSuc(Node root, Res p, Res s, int key)
+    {
+        
+        
+        p.pre = findpre(root, key);
+        s.succ = findsucc(root, key);
+    }
+    
+    static Node findpre(Node n, int t){
+        
+        Node pre = null;
+        
+        while(n!=null){    
+            
+        if(n.data>=t)
+            n = n.left;
+        else{
+            pre = n;
+            n = n.right;
+        }
+        
+            
+        }
+        
+        return pre;    
+    }
+    
+    static Node findsucc(Node n, int t){
+            
+        Node succ = null;
+        
+        while(n!=null){    
+            
+        if(n.data<=t)
+            n = n.right;
+        else{
+            succ = n;
+            n = n.left;
+        }
+        
+            
+        }
+        
+        return succ; 
+            
+    }
+}
