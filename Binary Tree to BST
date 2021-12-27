@@ -1,0 +1,40 @@
+class Solution
+{
+    int in=0;
+    // The given root is the root of the Binary Tree
+    // Return the root of the generated BST
+    Node binaryTreeToBST(Node root)
+    {
+       ArrayList<Integer> ar = new ArrayList<>();
+       
+       inorder(root, ar);
+       
+       Collections.sort(ar);
+       
+       solve(root,ar);
+       
+       return root;
+    }
+    
+    void inorder(Node n, List<Integer> ar){
+        if(n==null)
+        return;
+        
+        inorder(n.left, ar);
+        
+        ar.add(n.data);
+        inorder(n.right, ar);
+    }
+    
+    void solve(Node n, List<Integer> ar){
+        if(n==null)
+            return;
+            
+        solve(n.left,ar);
+        
+        n.data = ar.get(in);
+        in++;
+
+        solve(n.right,ar);
+    }
+}
