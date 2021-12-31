@@ -1,0 +1,23 @@
+class Solution {
+    int in = 1;
+    public int KthSmallestElement(Node root, int K) {
+        if(root==null)
+            return -1;
+            
+        int a = KthSmallestElement(root.left, K);
+        
+        if(in==K){
+            in = -1;
+            return root.data;
+        }
+        if(in==-1)
+            return a;
+        in++;
+        
+        int b = KthSmallestElement(root.right, K);
+        
+        if(a==-1)
+            return b;
+        return a;
+    }
+}
