@@ -1,0 +1,31 @@
+class Solution
+{   
+    static int res ;
+	public static int countPairs(Node root1, Node root2, int x)
+	{
+	    res = 0;
+	    solve(root1, root2, x);
+		return res;
+	}
+	
+	static void solve(Node a, Node b, int x){
+	    if(a==null)
+	        return;
+	        
+	    solve(a.left, b,x);
+	    find(b, x-a.data);
+	    solve(a.right, b,x);
+	}
+	
+	static void find(Node n, int x){
+	    if(n==null)
+	        return;
+	        
+	    if(n.data==x)
+	        res++;
+	    else if(n.data>x)
+	        find(n.left,x);
+	    else
+	        find(n.right,x);
+	}
+}
