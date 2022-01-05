@@ -1,0 +1,23 @@
+class Tree
+{
+    int c ;
+    int getCount(Node root,int l, int h)
+    {
+        c = 0;
+        solve(root,l,h);
+        
+        return c;
+    }
+    
+    void solve(Node n, int l, int h){
+        if(n==null)
+            return;
+            
+        solve(n.left, l, h);
+        
+        if(n.data>=l && n.data<=h)
+            c++;
+            
+        solve(n.right, l, h);
+    }
+}
