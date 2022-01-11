@@ -1,0 +1,16 @@
+class GFG
+{
+    public static boolean isDeadEnd(Node root)
+    {
+        return !solve(root,0, Integer.MAX_VALUE);
+    }
+    
+    static boolean solve(Node n, int a, int b){
+        if(n==null)
+            return true;
+        if(n.data==a+1 && n.data==b-1)
+            return false;
+        //System.out.println(n.data+" "+a+" "+b); 
+        return solve(n.left,a, n.data) & solve(n.right,n.data,b);
+    }
+}
