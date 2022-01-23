@@ -1,0 +1,21 @@
+class Solution{
+    
+    //Function to return sum of count of set bits in the integers from 1 to n.
+    public static int countSetBits(int n){
+        if(n<=1)
+            return n;
+            
+        int x = 0;
+        
+        while((1<<x) <=n)
+            x++;
+        
+        x--;
+          
+        int res = (1<<(x-1))*x;
+        res+= (n-(1<<x)+1)+ countSetBits(n-(1<<x));
+        
+        return res;
+        
+    }
+}
