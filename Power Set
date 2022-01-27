@@ -1,0 +1,28 @@
+class Solution
+{
+    public List<String> AllPossibleStrings(String s)
+    {
+        char [] ch = s.toCharArray();
+        
+        int n = ch.length;
+        
+        int tot = (1<<n)-1;
+        ArrayList<String> res = new ArrayList<>();
+        
+        for(int i=1;i<=tot;i++){
+            String rs = "";
+            
+            int b = i;
+            int pos = 0;
+            while(b>0){
+                if((b&1) == 1)
+                    rs+= Character.toString(ch[pos]);
+                b= b>>1;    
+                pos++;
+            }
+            res.add(rs);
+        }
+        Collections.sort(res);
+        return res;
+    }
+}
