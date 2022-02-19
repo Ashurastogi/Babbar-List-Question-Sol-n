@@ -1,0 +1,47 @@
+class Solution 
+{ 
+    static int ans=0;
+    ArrayList<ArrayList<Integer>> solve(int n, int p, ArrayList<Integer> a ,ArrayList<Integer> b ,ArrayList<Integer> d) 
+    {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        int i= 0;
+        int[] ith_ends = new int[n+1]; 
+        int[] ith_receives = new int[n+1];
+        int[] dia = new int[n+1];
+        
+        for(i=0;i<p;i++){
+            int q = a.get(i);
+            int h = b.get(i);
+            int t = d.get(i);
+            
+            ith_ends[q] = h;
+            dia[q] = t;
+            ith_receives[h] = q;
+        }
+        
+        for(i=1;i<=n;i++){
+            if(ith_receives[i] == 0 && ith_ends[i]!=0){
+                ans = Integer.MAX_VALUE;
+                //System.out.println("hi");
+                int w = dfs(i,ith_ends,dia);
+                
+                ArrayList<Integer> tem = new ArrayList<>();
+                tem.add(i);
+                tem.add(w);
+                tem.add(ans);
+                
+                res.add(tem);
+            }
+        }
+        return res;
+    }
+    
+    int dfs(int w, int[] ith_ends, int[]dia){
+        if(ith_ends[w]==0)
+            return w;
+            
+        ans = Math.min(ans,dia[w]);
+        
+        return(dfs(ith_ends[w],ith_ends,dia));
+    }
+} 
