@@ -1,0 +1,28 @@
+class Solution{
+    static ArrayList<Integer> candyStore(int cand[],int n,int k){
+        Arrays.sort(cand);
+        
+        k++;
+        int min1 = 0;
+        int min2 = 0;
+        
+        int req = n/k;
+        if(n%k!=0)
+            req++;
+        
+        int i;
+        for(i=0;i<req;i++)
+            min1+=cand[i];
+            
+        for(i=n-1;i>=n-req;i--)
+            min2+=cand[i];
+            
+        ArrayList<Integer> res = new ArrayList<>();
+        
+        res.add(min1);
+        res.add(min2);
+        
+        return res;
+        
+    }
+}
