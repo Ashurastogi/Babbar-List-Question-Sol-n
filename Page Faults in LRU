@@ -1,0 +1,32 @@
+class Solution{
+    static int pageFaults(int n, int c, int []arr){
+        int i,k;
+        
+        int res = 0;
+
+        ArrayList<Integer> a = new ArrayList<>();
+        for(i=0;i<n;i++){
+            int no = a.size();
+            //System.out.println(no);
+            for(k=0;k<no;k++){
+                if(a.get(k)==arr[i]){
+                    a.remove(k);
+                    break;
+                }
+            }
+            
+            if(k!=no)
+                a.add(arr[i]);
+            else if(no<c){
+                a.add(arr[i]);
+                res++;
+            }
+            else{
+                a.remove(0);
+                a.add(arr[i]);
+                res++;
+            }
+        }
+        return res;
+    }
+}
