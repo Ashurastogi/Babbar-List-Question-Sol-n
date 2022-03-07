@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define endl "\n"
+ 
+int main()
+{
+ 
+   long long int t;
+   cin>>t;
+   while(t--)
+   {
+       long long int n;
+       cin>>n;
+ 
+       long long int a[n],i;
+       for(i=0;i<n;++i)
+          cin>>a[i];
+ 
+       sort(a,a+n);
+ 
+       for(i=0;i<n && a[i]==1;++i)
+           cout<<a[i]<<" ";
+ 
+      //special case of 2^3 < 3^2       
+       if(i==n-2 && a[i]==2 && a[i+1]==3)
+         cout<<a[i]<<" "<<a[i+1]<<endl;
+ 
+       else
+       {
+           for(i=n-1;i>=0 && a[i]!=1;--i)
+              cout<<a[i]<<" ";
+ 
+            cout<<endl;  
+       }
+ 
+   }
+ 
+     return 0;
+}
