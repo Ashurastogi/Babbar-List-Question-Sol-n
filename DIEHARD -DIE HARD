@@ -1,0 +1,59 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+ 
+class Main
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		InputStreamReader re=new InputStreamReader(System.in);    
+        BufferedReader br=new BufferedReader(re);  
+		
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		int i,j;
+		
+		for(i=0;i<t;i++) {
+			
+			String s = br.readLine();
+			String[] ce = s.split(" ");
+			
+			
+			int h = Integer.parseInt(ce[0]);
+			int a = Integer.parseInt(ce[1]);
+			
+			int tim = 0;
+ 
+			
+			while(true) {
+				if(tim%2==0) {
+					h+=3;
+					a+=2;
+					
+					tim++;
+				}
+				else {
+					if(h>5 && a>10) {
+						h-=5;
+						a-=10;
+						tim++;
+					}
+					else {
+						h-=20;
+						a+=5;
+						
+						if(h<=0 || a<=0)
+							break;
+						else
+							tim++;
+					}
+				}
+ 
+			}
+			
+			System.out.println(tim);
+		}	
+	}
+} 
+
