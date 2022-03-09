@@ -1,0 +1,31 @@
+class Solution{
+    static String smallestNumber(int s, int d){
+        String res = "";
+        
+        if((d*9)<s)
+            return "-1";
+            
+        int i;    
+        int[] arr = new int[d];
+        
+        arr[0] = 1;
+        s--;
+        
+            for(i=d-1;i>=0;i--){
+                if(s>8){
+                    s=s-9;
+                    arr[i] = 9;
+                }
+                else{
+                    arr[i] += s;
+                    break;
+                }
+            }
+        
+        
+        for(i=0;i<d;i++)
+            res += String.valueOf(arr[i]);
+
+        return  res;
+    }
+}
