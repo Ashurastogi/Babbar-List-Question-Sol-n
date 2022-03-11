@@ -1,0 +1,41 @@
+class GFG
+{
+    ArrayList<Long> find(long arr[], int n, int x)
+    {
+        int l=0;
+        
+        int r = n-1;
+        ArrayList<Long> res = new ArrayList<>();
+        long f = -1;
+        long s = -1;
+        while(l<=r){
+            int mid =l+(r-l)/2;
+            
+            if(arr[mid]==x){
+                int u= mid;
+                
+                while(mid>=0 && arr[mid]==x){
+                    f = mid;
+                    mid--;
+                }
+                
+                mid = u;
+                while(mid<n && arr[mid]==x){
+                    s = mid;
+                    mid++;
+                }
+                
+                break;
+            }
+            else if(arr[mid]>x)
+                r = mid-1;
+            else
+                l = mid+1;
+        }
+        
+        res.add(f);
+        res.add(s);
+        
+        return res;
+    }
+}
