@@ -1,0 +1,57 @@
+class Solution {
+    static ArrayList<String> res = new ArrayList<>();
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        res.clear();
+        String s = "";
+        if(m[0][0]==0)
+            return res;
+            
+        int[][] t = new int[n][n];
+        solve(m,0,0,s,n,t);
+        return res;
+    }
+    
+    public static void solve(int[][] arr, int i, int j,String s, int n, int[][]t){
+        
+        
+        if(i==n-1 && j==n-1){
+            res.add(s);
+            return;
+        }
+            
+        if(t[i][j]==0 && isvalid(i+1,j,arr,n)){
+            t[i][j] = 1;
+            
+            solve(arr,i+1,j,s+"D",n,t);
+            t[i][j] = 0;
+        }
+        if(t[i][j]==0 && isvalid(i-1,j,arr,n)){
+            t[i][j] = 1;
+
+            solve(arr,i-1,j,s+"U",n,t);
+            t[i][j] = 0;
+        }
+        if(t[i][j]==0 && isvalid(i,j+1,arr,n)){
+            t[i][j] = 1;
+
+            solve(arr,i,j+1,s+"R",n,t);
+            t[i][j] = 0;
+        }
+        if(t[i][j]==0 && isvalid(i,j-1,arr,n)){
+            t[i][j] = 1;
+
+            solve(arr,i,j-1,s+"L",n,t);
+            t[i][j] = 0;
+        }
+    
+            
+    }
+    
+    
+    public static boolean isvalid(int i,int j, int[][] arr, int n){
+        if(i>=0 && j>=0 && i<n && j<n && arr[i][j]==1)
+            return true;
+            
+        return false;
+    }
+}
