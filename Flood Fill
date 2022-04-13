@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int nc) {
+        int n = img.size();
+        int m = img[0].size();
+        solve(img,sr,sc,nc,n,m);
+        
+        return img;
+    }
+    
+    void solve(vector<vector<int>>& img, int sr, int sc, int nc, int n, int m){
+        int tar  = img[sr][sc];
+        
+        if(tar==nc)
+            return;
+        
+        img[sr][sc] = nc;
+        
+        if(sr-1>=0 && img[sr-1][sc]==tar)
+            solve(img,sr-1,sc,nc,n,m);
+        
+        if(sr+1<n && img[sr+1][sc]==tar)
+            solve(img,sr+1,sc,nc,n,m);
+        
+        if(sc-1>=0 && img[sr][sc-1]==tar)
+            solve(img,sr,sc-1,nc,n,m);
+        
+        if(sc+1<m && img[sr][sc+1]==tar)
+            solve(img,sr,sc+1,nc,n,m);
+    }
+};
