@@ -1,0 +1,43 @@
+class Solution {
+    
+    void dfs(Node *curr,Node *tem, vector<Node *> &vis){
+        vis[tem->val] = tem;
+        
+        for(auto it:curr->neighbors){
+            if(vis[it->val]==NULL){
+                Node * t = new Node(it->val);
+                (tem->neighbors).push_back(t);
+                dfs(it,t,vis);
+                
+            }
+            else
+                (tem->neighbors).push_back(vis[it->val]);    
+        }
+    }
+public:
+    Node* cloneGraph(Node* n) {
+        if(n==NULL)
+            return NULL;
+        vector<Node*> vis(1000,NULL);
+        
+
+        Node *res = new Node(n->val);
+        vis[n->val] = res;
+
+        for(auto curr:n->neighbors){
+            if(vis[curr->val]==NULL){
+                Node * tem = new Node(curr->val);
+                (res->neighbors).push_back(tem);
+                dfs(curr,tem,vis);
+                
+            }
+            else
+                (res->neighbors).push_back(vis[curr->val]);
+        }
+            
+        
+        
+        return res;
+        
+    }
+};
