@@ -1,0 +1,51 @@
+class Solution {
+     void dfs(int i,vector<int> adj[],vector<int> &vis){
+        vis[i] = 1;
+        for(int a:adj[i]){
+            if(vis[a]==0){
+                dfs(a,adj,vis);
+            }
+        }
+    }
+    
+    
+public:
+    int makeConnected(int n, vector<vector<int>>& con) {
+        long long i,j,res=0;
+        vector<int> adj[n];
+        
+        int edge = con.size();
+        for(i=0;i<con.size();i++){
+            int a = con[i][0];
+            int b = con[i][1];
+            
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+        
+        vector<int> vis(n,0);
+        int comp = 0;
+        for(i=0;i<n;i++){
+            if(vis[i]==0){
+                comp++;
+                dfs(i,adj,vis);
+            
+                
+            }
+        }
+        
+        if(edge<(n-1))
+            return -1;
+    
+        int rededge = edge-((n-1)-(comp-1));
+    
+        if(rededge>=(comp-1))
+            return comp-1;
+    
+        return -1;
+    }
+    
+   
+    
+    
+};
