@@ -1,0 +1,38 @@
+public:
+	bool isBipartite(int v, vector<int>adj[]){
+	    int i;
+	    
+	    vector<int> col(v,-1);
+	    
+	    for(i=0;i<v;i++){
+	        if(col[i]==-1){
+	            if(!bfs(i,adj,col))
+	                return false;
+	        }
+	    }
+	    
+	    return true;
+	}
+	
+	
+	bool bfs(int i, vector<int>adj[], vector<int> &col){
+	    queue<int> q;
+	    col[i] = 1;
+	    q.push(i);
+	    while(!q.empty()){
+	        int t = q.front();
+	        
+	        q.pop();
+    	    for(auto a:adj[t]){
+    	        if(col[a]==-1){
+    	            col[a] = 1+col[t];
+    	            q.push(a);
+    	        }
+    	        else if(col[a]==col[t]){
+    	            return false;
+    	        }
+    	    }
+	    }
+	    
+	    return true;
+	}
