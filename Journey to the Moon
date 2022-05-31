@@ -1,0 +1,33 @@
+void dfs(ll i, ll &j, vector<ll> adj[], vector<ll> &vis){
+    vis[i] = 1;
+    j++;
+    
+    for(auto a:adj[i]){
+        if(vis[a]==-1){
+            dfs(a,j,adj,vis);
+        }
+    }    
+}
+
+void solve(ll n, ll p, vector<ll> adj[]) {
+    ll i,j,r;
+    
+    vector<ll> vis(n,-1);
+    vector<ll> res(n);
+    
+    for(i=0;i<n;i++){
+        if(vis[i]==-1){
+            j = 0;
+            dfs(i,j,adj,vis);
+            
+            res.push_back(j);
+        }
+    }
+        r = (n*(n-1))/2; 
+        for(auto t:res){
+            j = (t*(t-1))/2;
+            r = r-j;
+        }
+        
+    cout<<r<<endl;
+}
