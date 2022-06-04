@@ -1,0 +1,28 @@
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& fl, int src, int dst, int k) {
+        int i,j,r;
+        
+        int m = fl.size();
+        
+        vector<int> dp(n,INT_MAX);
+        
+        dp[src] = 0;
+        
+        for(i=0;i<=k;i++){
+            vector<int> d(dp);
+            for(j=0;j<m;j++){
+                if(dp[fl[j][0]]==INT_MAX)
+                    continue;
+               d[fl[j][1]] =min(d[fl[j][1]],(dp[fl[j][0]]+ fl[j][2]));
+                
+               
+            }
+            dp = d;
+            
+        }
+        
+        if(dp[dst]==INT_MAX)
+            return -1;
+        
+        return dp[dst];
+    }
