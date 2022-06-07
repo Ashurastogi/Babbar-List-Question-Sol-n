@@ -1,0 +1,70 @@
+
+#include <bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+
+vector<ll> itime;
+vector<ll> otime;
+ll timer = 1;
+
+void dfs(ll i,vector<ll> adj[]){
+	itime[i] = timer++;
+
+	for(auto t:adj[i]){
+		if(itime[t]==0){
+			
+			dfs(t,adj);
+		}
+	}
+	
+	otime[i] = timer++;
+}
+
+
+bool check(ll src, ll des){
+	return ((itime[src]>itime[des])&& (otime[src]<otime[des]));
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+
+	cin.tie(0);
+	ll n,i,j,a,b,m;
+
+	scanf("%lld",&n);
+	vector<ll> adj[n+1];
+
+	itime.resize(n+1);
+	otime.resize(n+1);
+
+	for(i=0;i<n-1;i++){
+		scanf("%lld %lld",&a,&b);
+		adj[a].push_back(b);
+		adj[b].push_back(a);
+
+	}
+	dfs(1,adj);
+
+
+	scanf("%lld",&m);
+	for(i=0;i<m;i++){
+		scanf("%lld %lld %lld",&j,&a,&b);
+
+		
+
+		if(j==1){
+			if(check(a,b))
+				printf("YES\n");
+			else
+				printf("NO\n");
+		}
+		else{
+			if(check(b,a))
+				printf("YES\n");
+			else
+				printf("NO\n");
+
+		}
+		
+	}
+}
