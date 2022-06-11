@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool canMeasureWater(int x, int y, int tar) {
+        if(x+y<tar)
+            return false;
+        
+        int dir[] = {x,-x,y,-y};
+        set<int> vis;
+        
+        vis.insert(0);
+        int i,j,k;
+        queue<int> q;
+        q.push(0);
+        
+        while(! q.empty()){
+            k=q.front();
+                q.pop();
+            if(k==tar)
+                return true;
+            
+            for(auto p:dir){
+                j=k+p;
+                
+                if(j==tar)
+                    return true;
+                if(j<0 || j>x+y)
+                    continue;
+                if(vis.find(j)==vis.end()){
+                    q.push(j);
+                    vis.insert(j);
+                    
+                }
+            }
+        }
+        
+        
+        return false;
+    }
+};
