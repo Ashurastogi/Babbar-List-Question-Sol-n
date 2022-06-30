@@ -1,0 +1,57 @@
+bool containKey(struct TrieNode *root,char ch){
+        return (root->children[ch -'a'] != NULL);
+    }
+    
+    
+    void put(struct TrieNode *root,char ch, TrieNode *n){
+        root->children[ch - 'a'] = n;
+    }
+    
+    TrieNode * get(TrieNode *root,char ch){
+        return root->children[ch - 'a'];
+    }
+    
+    void setend(TrieNode *root){
+        root->isLeaf = true;
+    }
+    
+    bool isend(TrieNode *root){
+        return root->isLeaf;
+    }
+
+
+//Function to insert string into TRIE.
+void insert(struct TrieNode *root, string k)
+{
+    int n = k.size();
+    
+    TrieNode *no = root;
+    int i,j;
+    
+    for(i=0;i<n;i++){
+        if(!containKey(no,k[i])) {
+            put(no,k[i],getNode());
+        }
+        
+        no = get(no,k[i]);
+    }
+    
+    setend(no);
+}
+
+//Function to use TRIE data structure and search the given string.
+bool search(struct TrieNode *root, string k) 
+{
+    int n = k.size();
+    
+    int i,j;
+    TrieNode *no = root;
+    for(i=0;i<n;i++){
+        if(!containKey(no,k[i]))
+            return false;
+            
+        no = get(no,k[i]);
+    }
+    
+    return isend(no);
+}
