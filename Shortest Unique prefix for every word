@@ -1,0 +1,88 @@
+struct Node{
+    struct Node *ch[26];
+    bool leaf;
+};
+
+struct Node* getnode(){
+    struct Node *n = (struct Node*)malloc(sizeof(struct Node));
+    
+    n->leaf = false;
+    for(int i=0;i<26;i++)
+        n->ch[i] = NULL;
+        
+    return n;
+}
+
+bool containKey(struct Node* n, char c){
+    return (n->ch[c-'a']!=NULL);
+}
+
+void put(struct Node *root, char c, struct Node *n){
+    root->ch[c-'a'] = n;
+}
+
+Node *get(struct Node* n, char c){
+    return n->ch[c-'a'];
+}
+
+bool checksingle(struct Node *n){
+    int c = 0;
+    
+    for(int i=0;i<26;i++){
+        if(n->ch[i]!=NULL)
+            c++;
+    }
+    
+    return (c==1)?1:0;
+}
+
+
+class Solution
+{
+    public:
+    vector<string> findPrefixes(string arr[], int no)
+    {
+        vector<string> res;
+        int i,j,num;
+        
+        struct Node * root = getnode();
+        struct Node * n= root;
+        
+        for(i=0;i<no;i++){
+            num = arr[i].size();
+            string s = arr[i];
+            
+            n = root;
+            for(j=0;j<num;j++){
+                if(!containKey(n,s[j]))
+                    put(n,s[j],getnode());
+                    
+                n = get(n,s[j]);
+            }
+            
+            n->leaf = true;
+        }
+        
+        
+        for(i=0;i<no;i++){
+            num = arr[i].size();
+            string s = arr[i];
+            n = root;
+            string r="";
+            int in = 0;
+            for(j=0;j<num;j++){
+                if(!checksingle(n))
+                    in = j;
+                
+                n = get(n,s[j]);
+                //cout<<in<<"\n";
+            }
+            r = s.substr(0,in+1);
+                res.push_back(r);
+            
+        }
+        
+        return res;
+    }
+    
+};
