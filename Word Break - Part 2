@@ -1,0 +1,32 @@
+class Solution{
+public:
+
+    vector<string> res;
+    vector<string> wordBreak(int n, vector<string>& dict, string s)
+    {
+        map<string, int> m;
+        for(int i=0;i<n;i++){
+            m[dict[i]]++;
+        }
+        solve(0,s,m,"");
+        
+        return res;
+    }
+    
+    void solve(int i, string s, map<string, int> &m, string r){
+        if(i==s.size()){
+            r = r.substr(0,r.size()-1);
+            res.push_back(r);    
+        }   
+        
+        for(int j = i+1;j<=s.size();j++){
+            string com = s.substr(i,(j-i));
+            //cout<<com<<"\n";
+            if(m[com]!=0){
+                solve(j,s,m,r+com+" ");
+            }
+        }
+        
+        
+    }
+};
