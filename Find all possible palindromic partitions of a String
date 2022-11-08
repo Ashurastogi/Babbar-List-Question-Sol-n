@@ -1,0 +1,59 @@
+class Solution {
+  public:
+    vector<vector<string>> res;
+    vector<string> tem;
+    vector<vector<string>> allPalindromicPerms(string s) {
+        
+        int n = s.size();
+        int  i,j;
+        
+        for(i=1;i<=n;i++){
+            tem.clear();
+            solve(i,s,n);
+        }
+        
+        return res;
+    }
+    
+    void solve(int i, string s, int n){
+        
+        string t = s.substr(0,i);
+        //cout<<t<<"\n";
+        if(isvalid(t)){
+            tem.push_back(t);
+            
+            string p = s.substr(i,n-i);
+            //cout<<p<<" mid  \n";
+            
+            if(p.size()==0){
+                res.push_back(tem);
+            }
+            else{
+                for(int j = 1;j<=p.size();j++){
+                    solve(j,p,p.size());
+                    
+                }
+            }
+            
+            tem.pop_back();
+        }
+        
+        return;
+    }
+    
+    
+    bool isvalid(string t){
+        int i=0;
+        int n = t.size()-1;
+        //cout<<i<<" "<<n<<"\n";
+        while(i<n){
+            if(t[i]!=t[n])
+                return false;
+                
+            i++;
+            n--;
+        }
+        
+        return true;
+    }
+};
