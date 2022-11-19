@@ -1,0 +1,53 @@
+class Solution {
+  public:
+    //Function to return a list of indexes denoting the required 
+    //combinations whose sum is equal to given number.
+    vector<vector<int>> res;
+    map<vector<int>, int> m;
+    vector<vector<int> > combinationSum(vector<int> &arr, int t) {
+        
+        int n = arr.size();
+        
+        vector<int> tem;
+        set<int> s(arr.begin(),arr.end());
+        vector<int> p;
+        p.assign(s.begin(),s.end());
+        solve(0,p.size(),t,tem,p);
+        return res;   
+    }
+    
+    void solve(int in, int n, int t, vector<int> &tem, vector<int> &arr){
+
+        
+        if(t==0){
+            if(m[tem]==0){
+                res.push_back(tem);
+                m[tem] = 1;    
+            }
+            
+            return;
+        }
+        
+        if(in == n){
+
+            if(t==0 && m[tem]==0){
+                res.push_back(tem);
+                m[tem] = 1;
+            }
+                
+            return;
+        }
+        
+        
+        if(t-arr[in]<0)
+            return;
+        tem.push_back(arr[in]);
+        
+        solve(in,n,t-arr[in],tem,arr);
+        
+        tem.pop_back();
+        solve(in+1,n,t,tem,arr);
+        
+    
+    }
+};
