@@ -1,0 +1,48 @@
+class Solution{
+  public:
+    bool isKPartitionPossible(int a[], int n, int k)
+    {
+         int i,j;
+         
+        int sum = 0;
+        
+        for(i=0;i<n;i++){
+            sum += a[i];
+        }
+        
+        if(sum %k!=0)
+            return false;
+            
+        int div = sum/k;
+        vector<int> vis(n);
+        
+        
+        
+        return solve(0,a,n,0,div,vis,k);
+        
+    }
+    
+    
+    bool solve(int i,int a[],int n,int sum, int t,vector<int> &vis,int k){
+        if(k==0)
+            return true;
+            
+        if(sum>t)
+            return false;
+        if(sum == t)
+            return solve(0,a,n,0,t,vis,k-1);
+            
+        for(int j=i;j<n;j++){
+            if(vis[j]==1)
+                continue;
+                
+            vis[j] = 1;
+            if(solve(j+1,a,n,sum+a[j],t,vis,k))
+                return true;
+            vis[j] = 0;
+        }
+        
+        return false;
+        
+    }
+};
