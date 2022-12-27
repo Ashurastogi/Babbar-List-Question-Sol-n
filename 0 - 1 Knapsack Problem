@@ -1,0 +1,36 @@
+int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       int i,j;
+       
+       vector<vector<int>> dp(n+1,vector<int>(1001,0));
+       int m = 0;
+       for(i=n-1;i>=0;i--){
+           
+           for(j=W;j>=0;j--){
+               if(j-wt[i]>=0)
+                    dp[i][j] = max(dp[i+1][j],val[i]+dp[i+1][j-wt[i]]); 
+                else
+                    dp[i][j] = dp[i+1][j];
+                    
+                m = max(m,dp[i][j]);
+           }
+           
+       }
+       
+       return m;
+       
+       //return solve(0,n,W,wt,val,dp);
+    }
+    
+    int solve(int in, int n, int w, int wt[], int val[],vector<vector<int>> &dp){
+        if(in==n || w<=0)
+            return 0;
+            
+        if(dp[in][w]!=-1)  
+            return dp[in][w];
+            
+        
+        int res = max(solve(in+1,n,w,wt,val,dp),val[in]+solve(in+1,n,w-wt[in],wt,val,dp));
+        
+        return dp[n][w] = res;
+    }
