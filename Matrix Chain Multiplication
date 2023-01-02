@@ -1,0 +1,45 @@
+class Solution{
+public:
+    int matrixMultiplication(int n, int arr[])
+    {
+        int i,j,k;
+        
+        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
+        
+        for(i=n-1;i>0;i--){
+            
+            for(j=i+1;j<n;j++){
+                int m = INT_MAX;
+                for(k=i;k<j;k++){
+                    int res = arr[i-1]*arr[k]*arr[j]+dp[i][k]+dp[k+1][j];
+                
+                    m = min(m,res);    
+                }
+                
+                dp[i][j]=m;
+            }
+        }
+        
+        return dp[1][n-1];
+        
+        //return solve(1,n-1,arr,dp);
+
+    }
+    
+    int solve(int i, int n, int arr[], vector<vector<int>> &dp){
+        if(i==n)
+            return 0;
+        
+        if(dp[i][n]!=-1)
+            return dp[i][n];
+        int m = INT_MAX;
+        for(int k=i;k<n;k++){
+            int res = arr[i-1]*arr[k]*arr[n]+solve(i,k,arr,dp)+solve(k+1,n,arr,dp);
+            
+            m = min(m,res);
+        }
+        
+        return dp[i][n]=m;
+        
+    }
+};
