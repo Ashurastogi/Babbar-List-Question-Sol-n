@@ -1,0 +1,63 @@
+long long int carAssembly(vector<vector<int>>& a, vector<vector<int>>& t, vector<int>& e, vector<int>& x){
+      int n = a[0].size();
+      
+      vector<vector<long long int>> dp(2,vector<long long int>(n+1));
+      
+      int l,m,n,o;
+      
+      int i,j;
+      
+      dp[0][n] = x[0];
+      dp[1][n] = x[1];
+      
+      for(j=n-1;j>=0;j--){
+      for(i=0;i<2;i++){
+
+            long long int m1 = INT_MAX;
+            long long int m2 = INT_MAX; 
+            
+            m1 = a[i][j]+dp[i][j+1];
+            
+            if(j!=n-1){
+                if(i==0)
+                    m2 = a[i][j]+t[i][j+1]+dp[1][j+1];
+                else
+                    m2 = a[i][j]+t[i][j+1]+dp[0][j+1];
+            }
+            
+            dp[i][j] = min(m1,m2);
+
+          }
+      }
+      
+      dp[0][0] += e[0];
+      dp[1][0] += e[1];
+      
+      return min(dp[0][0],dp[1][0]);
+      //return min(l,r);
+  }
+  
+  long long int solve(int in,int l, int n, vector<vector<int>>& a, vector<vector<int>>& t, vector<int>& x,vector<vector<long long int>> &dp){
+      if(in==n){
+          if(l==0)
+            return x[0];
+        
+        return x[1];
+      }
+        if(dp[l][in]!=-1)
+            return dp[l][in];
+        
+        long long int m1 = INT_MAX;
+        long long int m2 = INT_MAX;
+        
+        m1 = a[l][in]+solve(in+1,l,n,a,t,x,dp);
+        
+        if(in+1<n){
+            if(l==0)
+                m2 = a[l][in]+t[l][in+1]+solve(in+1,1,n,a,t,x,dp);
+            else
+                m2 = a[l][in]+t[l][in+1]+solve(in+1,0,n,a,t,x,dp);
+        }
+        
+        return dp[l][in] = min(m1,m2);
+  }
