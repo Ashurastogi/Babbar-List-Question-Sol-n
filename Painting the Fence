@@ -1,0 +1,16 @@
+long long countWays(int n, int k){
+        long long i,j,same,diff,res;
+        
+        same = k;
+        diff = k;
+        res = k;
+        
+        for(i=1;i<n;i++){
+            same = diff;
+            diff = res*(k-1);
+            
+            res = (same+diff)%1000000007;
+        }
+        
+        return res;
+    }
