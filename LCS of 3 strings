@@ -1,0 +1,21 @@
+int LCSof3 (string s1, string s2, string s3, int n1, int n2, int n3)
+{
+    int i,j,k;
+    
+    vector<vector<vector<int>>> dp(21,vector<vector<int>>(21,vector<int>(21)));
+    
+    for(i=n1-1;i>=0;i--){
+        for(j=n2-1;j>=0;j--){
+            for(k=n3-1;k>=0;k--){
+                if(s1[i]==s2[j] && s2[j]==s3[k]){
+                    dp[i][j][k] = 1+dp[i+1][j+1][k+1];
+                }   
+                else{
+                    dp[i][j][k] = max(dp[i+1][j][k],max(dp[i][j+1][k],dp[i][j][k+1]));
+                }
+            }
+        }
+    }
+    
+    return dp[0][0][0];
+}
